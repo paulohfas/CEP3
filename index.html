@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="perfumaria.css">
+</head>
+
+<body bgcolor="#FFFF00">
+
+  <div class="info">
+
+    <div class="background">
+
+      <img class="lupa" src="LUPA.png" alt="">
+      <h1>Encontre o CEP</h1>
+      <form>
+        <label for="cep">Digite o CEP:</label>
+        <input type="text" id="cep" name="cep">
+        <button type="button" onclick="procurarCep()">Procurar</button>
+      </form>
+
+      <div>
+        <label for="logradouro">Logradouro:</label>
+        <span id="logradouro"></span>
+      </div>
+
+      <div>
+        <label for="bairro">Bairro:</label>
+        <span id="bairro"></span>
+      </div>
+
+      <div>
+        <label for="localidade">Localidade:</label>
+        <span id="localidade"></span>
+      </div>
+
+      <div>
+        <label for="uf">UF:</label>
+        <span id="uf"></span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function procurarCep() {
+      const cep = document.getElementById('cep').value;
+      const url = `https://viacep.com.br/ws/${cep}/json/`;
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('logradouro').textContent = data.logradouro;
+          document.getElementById('bairro').textContent = data.bairro;
+          document.getElementById('localidade').textContent = data.localidade;
+          document.getElementById('uf').textContent = data.uf;
+        })
+        .catch(error => console.error(error));
+    }
+  </script>
+
+</body>
+</html>
